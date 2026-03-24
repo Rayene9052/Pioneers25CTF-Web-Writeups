@@ -25,8 +25,8 @@ This CTF featured **7 web security challenges** covering a wide range of modern 
 | [NexaCorp](#nexacorp) | GraphQL Introspection + Mass Assignment + SQL Injection | Node.js, GraphQL, SQLite |
 | [Tabi3a Jemila](#tabi3a-jemila) | HTTP Parameter Pollution (HPP) | Node.js, Express |
 | [RazorCTF](#razorctf) | SSTI with Filter Bypass (.NET Reflection) | ASP.NET Core, RazorLight |
-| [Alwen Jemila](#alwen-jemila) | JWT Algorithm Confusion (RS256 → HS256) | Node.js, JWT |
-| [SnippetVault](#snippetvault) | Prototype Pollution + SSRF + Cache Poisoning | Node.js, Redis, Express |
+| [Alwen Jemila (ChromaLeak)](#alwen-jemila) | CSS Injection (Non-Hex Escape Bypass) + Attribute Selector Exfiltration | Node.js, Express, CSS |
+| [SnippetVault](#snippetvault) | 5-Stage Chain: Blind SQLi → Auth Bypass → Admin Unlock → Command Injection | Python, Flask, SQLite |
 
 ---
 
