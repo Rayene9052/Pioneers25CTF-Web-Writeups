@@ -7,7 +7,7 @@
 
 ## Challenge Overview
 
-**NoSQL True Warrior** is a Node.js web application built with Express and MongoDB. It features an admin panel with a report search functionality. The application demonstrates a classic **NoSQL Injection** vulnerability where user input is passed directly into MongoDB queries, allowing attackers to extract sensitive data through blind regex-based enumeration.
+**True Warrior** is a Node.js web application built with Express and MongoDB. It features an admin panel with a report search functionality. The application demonstrates a classic **NoSQL Injection** vulnerability where user input is passed directly into MongoDB queries, allowing attackers to extract sensitive data through blind regex-based enumeration.
 
 > *"Master the ancient art of NoSQL queries. Only a true warrior can extract the secrets hidden within the database."*
 
