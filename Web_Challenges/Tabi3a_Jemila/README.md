@@ -258,6 +258,3 @@ Having multiple layers of security is good, but only if they validate the **same
 
 ---
 
-## Fun Fact
-
-The challenge name "Tabi3a" (طبيعة) means "nature" in Arabic, and the flower theme reflects the natural beauty of proper input validation... which this challenge deliberately lacks! 🌸
