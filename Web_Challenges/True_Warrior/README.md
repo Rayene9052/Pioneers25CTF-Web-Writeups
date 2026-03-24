@@ -222,6 +222,7 @@ password = extract_password()
 ---
 
 ### Stage 2: Extract Flag via Authenticated Blind Search
+![Challenge UI](challenge_ui2.png)
 
 #### Login with Extracted Password
 
