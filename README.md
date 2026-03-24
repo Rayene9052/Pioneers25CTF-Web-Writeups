@@ -1,16 +1,13 @@
 # Pioneers25 CTF - Web Challenges Writeups
 
-This repository contains detailed writeups for the web security challenges from the **Pioneers 2025 CTF** competition. Each writeup includes comprehensive exploitation techniques, vulnerability analysis, and source code examination.
+This repository contains detailed writeups for the web security challenges from the **Pioneers25 CTF** competition. Each writeup includes comprehensive exploitation techniques, vulnerability analysis, and source code examination.
 
 ---
 
 ## 📋 Table of Contents
 
 - [Challenge Overview](#challenge-overview)
-- [Challenge Categories](#challenge-categories)
 - [Structure](#structure)
-- [Quick Navigation](#quick-navigation)
-- [Key Learning Outcomes](#key-learning-outcomes)
 
 ---
 
