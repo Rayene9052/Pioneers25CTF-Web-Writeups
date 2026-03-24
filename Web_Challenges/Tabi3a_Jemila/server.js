@@ -4,10 +4,8 @@ const path = require("path");
 
 const app = express();
 
-// ❗ Vulnerable on purpose: parse body for GET requests
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// serve static files
 app.use(express.static("public"));
 
 const flowers = {
@@ -45,14 +43,11 @@ const flowers = {
   }
 };
 
-// Home page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// ❌ Broken authorization middleware
 app.use("/flower", (req, res, next) => {
-  // Authorization checks QUERY only
   if (req.query.id == "1") {
     return res
       .status(403)
@@ -61,9 +56,7 @@ app.use("/flower", (req, res, next) => {
   next();
 });
 
-// 🌸 Flower endpoint (vulnerable)
 app.get("/flower", (req, res) => {
-  // Data source confusion (HPP)
   const id = req.body.id || req.query.id;
 
   if (!flowers[id]) {
