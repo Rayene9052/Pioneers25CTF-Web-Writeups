@@ -48,5 +48,5 @@ All writeups follow a consistent format:
 2. **Deployment Instructions** - How to run the challenge locally
 3. **Reconnaissance & Blackbox Testing** *(for blackbox challenges)* - Initial exploration without source code access
 4. **Exploitation** - Step-by-step attack methodology
-5. **Understanding the Source Code Vulnerabilities** *(for blackbox challenges)* - Deep dive into the code flaws
+5. **Understanding the Source Code Vulnerabilities**  - Deep dive into the code flaws
 6. **Key Takeaways** - Security lessons and mitigation strategies
