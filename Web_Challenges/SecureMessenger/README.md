@@ -1,4 +1,4 @@
-# RazorCtf — Writeup
+# SecureMessenger — Writeup
 
 **Category:** Web
 **Flag:** `Pioneers25{...}` *(flag varies per deployment)*
@@ -7,7 +7,7 @@
 
 ## Challenge Overview
 
-RazorCtf is an ASP.NET Core web application that provides a template preview feature using the RazorLight templating engine. Users can submit custom templates that get rendered server-side. While the application implements security filters to block dangerous keywords, these filters can be bypassed using .NET reflection techniques.
+SecureMessenger is an ASP.NET Core web application that provides a template preview feature using the RazorLight templating engine. Users can submit custom templates that get rendered server-side. While the application implements security filters to block dangerous keywords, these filters can be bypassed using .NET reflection techniques.
 
 ---
 
@@ -16,8 +16,8 @@ RazorCtf is an ASP.NET Core web application that provides a template preview fea
 ### Docker (Recommended)
 
 ```bash
-docker build -t razorctf .
-docker run -p 8080:8080 razorctf
+docker build -t securemessenger .
+docker run -p 8080:8080 securemessenger
 ```
 
 The challenge will be available at `http://localhost:8080`.
