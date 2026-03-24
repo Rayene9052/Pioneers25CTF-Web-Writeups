@@ -260,11 +260,3 @@ print(f"[✓] FLAG: {flag}")
 
 ---
 
-## Red Herrings
-
-| Feature | Looks Like | Reality |
-|---------|------------|---------|
-| `/snippet/<id>/embed` | SSTI via `render_template_string` | Content is a Jinja2 variable, not interpolated |
-| `/snippet/<id>/embed?callback=` | JSONP injection | Callback validated with strict regex |
-| Profile bio field | SSTI | Jinja2 autoescaping enabled |
-| Upload filename | Command injection | Can't inject `\n` via HTTP headers |
