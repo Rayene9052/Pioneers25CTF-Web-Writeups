@@ -104,7 +104,7 @@ def extract_pin():
                 break
     return pin
 
-admin_pin = extract_pin()  
+admin_pin = extract_pin()  # Output: a3f72b (example)
 ```
 
 ---
