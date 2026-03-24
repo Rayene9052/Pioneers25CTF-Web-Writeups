@@ -46,7 +46,6 @@ This hints at a `X-Dev-Mode` header for later use.
 
 ### Finding the GraphQL Endpoint
 
-**Option 1: Intercept traffic**
 
 Open browser DevTools → Network tab → Try to login or register. Observe:
 
@@ -57,11 +56,6 @@ Content-Type: application/json
 {"query":"mutation L($u:String!,$p:String!){login(username:$u,password:$p){token user{id username role}}}","variables":{"u":"test","p":"test"}}
 ```
 
-**Option 2: Decode base64 in source**
-
-The inline JavaScript contains `atob("L2dyYXBocWw=")` which decodes to `/graphql`.
-
-**Endpoint confirmed:** `/graphql`
 
 ---
 
