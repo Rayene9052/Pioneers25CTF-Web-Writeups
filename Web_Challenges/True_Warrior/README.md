@@ -286,7 +286,7 @@ flag = extract_flag(session)
 Run the provided solver script:
 
 ```bash
-python NoSQL_True_Warrior/solver/solver.py http://localhost:8080
+python True_Warrior/solver/solver.py http://localhost:8080
 ```
 
 The solver automates both stages and outputs the admin password and flag.

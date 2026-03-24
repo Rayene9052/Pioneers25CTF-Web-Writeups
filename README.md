@@ -17,7 +17,7 @@ This CTF featured **7 web security challenges** covering a wide range of modern 
 
 | Challenge | Primary Vulnerability | Technologies |
 |-----------|----------------------|--------------|
-| [NoSQL_True_Warrior](#nosql_true_warrior) | NoSQL Injection (Blind Regex) | Node.js, MongoDB, Express |
+| [True_Warrior](#true_warrior) | NoSQL Injection (Blind Regex) | Node.js, MongoDB, Express |
 | [CipherNote](#ciphernote) | Server-Side Template Injection (SSTI) | Python, Flask, Jinja2 |
 | [NexaCorp](#nexacorp) | GraphQL Introspection + Mass Assignment + SQL Injection | Node.js, GraphQL, SQLite |
 | [Tabi3a Jemila](#tabi3a-jemila) | HTTP Parameter Pollution (HPP) | Node.js, Express |
