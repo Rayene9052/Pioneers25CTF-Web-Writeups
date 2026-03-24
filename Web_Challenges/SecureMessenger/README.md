@@ -151,7 +151,7 @@ Using reflection to dynamically access `System.IO.File.ReadAllText`:
 
 **Response:**
 ```
-Pioneers25{...}
+Pioneers25{R4z0rrrr_T3mpl4te_inj3ct1on_1s_H3re}
 ```
 
 ✅ **Success!** The flag is retrieved.
