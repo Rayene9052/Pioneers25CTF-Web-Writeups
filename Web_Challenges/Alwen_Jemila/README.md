@@ -1,4 +1,4 @@
-# ChromaLeak — Writeup
+# Alwen Jemila — Writeup
 
 **Category:** Web
 **Flag:** `Pioneers25{css_3sc4p3s_b3y0nd_h3x}`
@@ -7,7 +7,7 @@
 
 ## Challenge Overview
 
-**ChromaLeak** is a note-sharing platform where users can create notes with custom CSS themes. The application implements a sophisticated **multi-pass CSS sanitizer** designed to prevent malicious CSS injection. An admin bot periodically reviews reported notes while authenticated, and the admin's CSRF token (hidden in the page HTML) contains the flag.
+**Alwen Jemila** is a note-sharing platform where users can create notes with custom CSS themes. The application implements a sophisticated **multi-pass CSS sanitizer** designed to prevent malicious CSS injection. An admin bot periodically reviews reported notes while authenticated, and the admin's CSRF token (hidden in the page HTML) contains the flag.
 
 > *"Welcome to ChromaLeak, a note-sharing platform where you can style your notes with custom CSS themes!"*
 >
