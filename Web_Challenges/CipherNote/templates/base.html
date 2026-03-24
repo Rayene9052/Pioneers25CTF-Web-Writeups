@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CipherNote — End-to-end encrypted note sharing platform. Your secrets, secured.">
+    <title>{% block title %}CipherNote{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Animated background particles -->
+    <div class="bg-particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="nav-brand">
+                <span class="brand-icon">🔐</span>
+                <span class="brand-text">Cipher<span class="accent">Note</span></span>
+            </a>
+            <div class="nav-links">
+                {% if session.get('user_id') %}
+                    <a href="{{ url_for('dashboard') }}" class="nav-link">
+                        <span class="nav-icon">📋</span> Dashboard
+                    </a>
+                    <a href="{{ url_for('create') }}" class="nav-link">
+                        <span class="nav-icon">✏️</span> New Note
+                    </a>
+                    {% if session.get('is_admin') %}
+                        <a href="{{ url_for('admin') }}" class="nav-link nav-admin">
+                            <span class="nav-icon">⚙️</span> Admin
+                        </a>
+                    {% endif %}
+                    <div class="nav-user">
+                        <span class="user-badge">{{ session.get('username', 'User') }}</span>
+                        <a href="{{ url_for('logout') }}" class="nav-link btn-logout">Logout</a>
+                    </div>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="nav-link">Login</a>
+                    <a href="{{ url_for('register') }}" class="nav-link btn-primary-nav">Sign Up</a>
+                {% endif %}
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}" onclick="this.remove()">
+                        <span class="flash-icon">
+                            {% if category == 'success' %}✓{% elif category == 'danger' %}✕{% elif category == 'warning' %}⚠{% else %}ℹ{% endif %}
+                        </span>
+                        {{ message }}
+                        <span class="flash-close">×</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% if error %}
+            <div class="error-page">
+                <h1 class="glitch" data-text="{{ error }}">{{ error }}</h1>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Return Home</a>
+            </div>
+        {% else %}
+            {% block content %}{% endblock %}
+        {% endif %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">
+                <span class="brand-icon-sm">🔐</span>
+                CipherNote v2.4.1 — Secure by design
+            </p>
+            <p class="footer-sub">Your secrets. Your encryption. Your control.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

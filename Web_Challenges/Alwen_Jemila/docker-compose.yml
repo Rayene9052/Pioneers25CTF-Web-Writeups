@@ -1,0 +1,28 @@
+services:
+  chromaleak:
+    build: .
+    ports:
+      - "4002:3000"
+    environment:
+      - PORT=3000
+      - FLAG=Pioneers25{css_3sc4p3s_b3y0nd_h3x}
+      - ADMIN_PASSWORD=sup3r_s3cur3_4dm1n_p4ss!
+      # APP_URL: The PUBLIC URL players use to access the challenge.
+      - APP_URL=http://20.199.128.9:4002
+      # BOT_INTERNAL_URL: The URL the admin bot uses to navigate INSIDE Docker.
+      # Always http://localhost:<internal port> since bot and app share the same container.
+      - BOT_INTERNAL_URL=http://localhost:3000
+      - BOT_TIMEOUT=8000
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+    restart: unless-stopped
+    # On Linux: map host.docker.internal to the host IP so the bot can reach
+    # the player's leak server via host.docker.internal (works natively on Docker Desktop)
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '1.0'
+    tmpfs:
+      - /tmp

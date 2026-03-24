@@ -1,0 +1,79 @@
+<%- include('partials/header') %>
+</head>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <a href="/" class="logo">Chroma<span class="accent">Leak</span></a>
+            <div class="nav-links">
+                <% if (user) { %>
+                    <span class="nav-user"><%= user.username %></span>
+                    <a href="/dashboard">My Notes</a>
+                    <a href="/create">New Note</a>
+                    <a href="/report">Report</a>
+                    <a href="/logout">Logout</a>
+                <% } else { %>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="source-page">
+            <h2>Source Code</h2>
+            <p class="subtitle">This is a white-box challenge. Here is the CSS sanitizer source code:</p>
+
+            <div class="source-block">
+                <h3>utils/sanitizer.js</h3>
+                <pre><code>function sanitizeCSS(css) {
+    if (typeof css !== 'string') return '';
+
+    let sanitized = css;
+
+    sanitized = sanitized.replace(/&lt;\s*\/?style[^&gt;]*/gi, '/* blocked */');
+    sanitized = sanitized.replace(/&lt;[^&gt;]*&gt;/g, '/* blocked */');
+    sanitized = sanitized.replace(/@import\b[^;]*/gi, '/* blocked */');
+    sanitized = sanitized.replace(/@font-face\s*\{[^}]*\}/gi, '/* blocked */');
+    sanitized = sanitized.replace(/@namespace\b[^;]*/gi, '/* blocked */');
+    sanitized = sanitized.replace(/url\s*\(/gi, '/* blocked */');
+    sanitized = sanitized.replace(/expression\s*\(/gi, '/* blocked */');
+    sanitized = sanitized.replace(/javascript\s*:/gi, '/* blocked */');
+    sanitized = sanitized.replace(/vbscript\s*:/gi, '/* blocked */');
+    sanitized = sanitized.replace(/behavior\s*:/gi, '/* blocked */');
+    sanitized = sanitized.replace(/-moz-binding\s*:/gi, '/* blocked */');
+    sanitized = sanitized.replace(/\\[0-9a-fA-F]{1,6}\s?/g, '/* blocked */');
+
+    sanitized = sanitized.replace(/@import\b[^;]*/gi, '/* blocked */');
+    sanitized = sanitized.replace(/@font-face\s*\{[^}]*\}/gi, '/* blocked */');
+    sanitized = sanitized.replace(/url\s*\(/gi, '/* blocked */');
+    sanitized = sanitized.replace(/expression\s*\(/gi, '/* blocked */');
+    sanitized = sanitized.replace(/javascript\s*:/gi, '/* blocked */');
+    sanitized = sanitized.replace(/\\[0-9a-fA-F]{1,6}\s?/g, '/* blocked */');
+
+    sanitized = sanitized.replace(/url\s*\(/gi, '/* blocked */');
+
+    if (sanitized.length > 10000) {
+        return '/* CSS too long */';
+    }
+
+    return sanitized;
+}
+
+module.exports = { sanitizeCSS };</code></pre>
+            </div>
+
+            <div class="source-info">
+                <h3>Challenge Info</h3>
+                <ul>
+                    <li>The admin bot visits reported pages while logged in</li>
+                    <li>Every page includes a hidden CSRF token for logged-in users</li>
+                    <li>Custom CSS is injected into a <code>&lt;style&gt;</code> tag on note pages</li>
+                    <li>The CSS passes through the sanitizer shown above before rendering</li>
+                    <li>CSP: <code>img-src *; font-src *;</code> (images and fonts load from any origin)</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+<%- include('partials/footer') %>

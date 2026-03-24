@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Admin Dashboard</h1>
+          <div class="sub">Welcome, admin • internal operations</div>
+        </div>
+      </div>
+      <span class="pill">Session: active</span>
+    </div>
+
+    <div class="card">
+      <h2>Tools</h2>
+      <div class="kv">
+        • Search internal reports (metadata only)<br>
+        • Archive logs (disabled)<br>
+        • Rotate keys (disabled)
+      </div>
+
+      <div class="row">
+        <a class="btn" href="/admin/search-ui">Open Report Search</a>
+        <form method="POST" action="/logout" style="margin:0">
+          <button class="btn2" type="submit">Logout</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

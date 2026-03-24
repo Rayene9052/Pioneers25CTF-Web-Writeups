@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+{% if error %}
+  <h2>Scan</h2>
+  <p class="err">{{ error }}</p>
+{% else %}
+  <h2>Scan Result</h2>
+  <div class="box">
+    <b>Stored file:</b> <code>{{ stored_as }}</code><br>
+    <b>Original name:</b> <code>{{ filename }}</code><br>
+    <b>Description:</b> <code>{{ description }}</code><br><br>
+    <pre>{{ output or "(no output)" }}</pre>
+  </div>
+  <a href="/admin/dashboard">&larr; Back</a>
+{% endif %}
+{% endblock %}

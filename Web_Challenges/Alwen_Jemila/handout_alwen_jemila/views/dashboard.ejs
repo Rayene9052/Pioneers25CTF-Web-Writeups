@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+</head>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <a href="/" class="logo">Chroma<span class="accent">Leak</span></a>
+            <div class="nav-links">
+                <span class="nav-user"><%= user.username %></span>
+                <a href="/dashboard">My Notes</a>
+                <a href="/create">New Note</a>
+                <a href="/report">Report</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <form id="csrf-protection" aria-hidden="true">
+            <input type="text" name="csrf_token" value="<%= csrfToken %>" readonly tabindex="-1"
+                   style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;border:0;padding:0;">
+        </form>
+
+        <div class="dashboard-header">
+            <h2>My Notes</h2>
+            <a href="/create" class="btn btn-primary">+ New Note</a>
+        </div>
+
+        <% if (notes.length === 0) { %>
+            <div class="empty-state">
+                <p>You haven't created any notes yet.</p>
+                <a href="/create" class="btn btn-secondary">Create your first note</a>
+            </div>
+        <% } else { %>
+            <div class="notes-grid">
+                <% notes.forEach(note => { %>
+                    <div class="note-card">
+                        <h3><a href="/note/<%= note.id %>"><%= note.title %></a></h3>
+                        <span class="note-date"><%= new Date(note.created_at).toLocaleDateString() %></span>
+                        <div class="note-actions">
+                            <a href="/note/<%= note.id %>" class="btn btn-sm">View</a>
+                            <form method="POST" action="/delete/<%= note.id %>" style="display:inline">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
+    </main>
+
+<%- include('partials/footer') %>

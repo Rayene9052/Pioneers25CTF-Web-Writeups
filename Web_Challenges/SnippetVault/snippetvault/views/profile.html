@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Profile &ndash; {{ username }}</h2>
+<div class="box">
+  <b>Role:</b> {{ role }}<br><br>
+  <b>Bio:</b><pre>{{ bio }}</pre>
+</div>
+<div class="box">
+  <h3>Edit Bio</h3>
+  <form method="post">
+    <textarea name="bio" rows="5">{{ bio }}</textarea><br><br>
+    <input type="submit" value="Save">
+  </form>
+  {% if msg %}<p class="ok">{{ msg }}</p>{% endif %}
+</div>
+{% endblock %}

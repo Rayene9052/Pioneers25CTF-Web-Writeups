@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %}Create Note — CipherNote{% endblock %}
+
+{% block content %}
+<div class="create-container">
+    <div class="create-header">
+        <h1 class="page-title">Create Encrypted Note</h1>
+        <p class="page-subtitle">Your content will be encrypted and stored securely</p>
+    </div>
+
+    <div class="create-layout">
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+            <form method="POST" action="{{ url_for('create') }}" class="create-form" id="createForm">
+                <div class="form-group">
+                    <label for="title" class="form-label">Note Title</label>
+                    <input type="text" id="title" name="title" class="form-input" placeholder="Enter note title..."
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="content" class="form-label">
+                        Content
+                        <span class="label-hint">Supports template rendering in preview</span>
+                    </label>
+                    <textarea id="content" name="content" class="form-textarea"
+                        placeholder="Write your note content here..." rows="12" required></textarea>
+                </div>
+
+                <div class="form-group form-group-inline">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" name="encrypted" id="encrypted" checked>
+                        <span class="checkbox-custom"></span>
+                        <span class="checkbox-label">🔒 Encrypt this note</span>
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="previewBtn">
+                        <span>👁️ Preview</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <span>💾 Save & Encrypt</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel" id="previewPanel">
+            <div class="preview-header">
+                <h3>
+                    <span class="preview-dot"></span>
+                    Live Preview
+                </h3>
+                <span class="preview-status" id="previewStatus">Ready</span>
+            </div>
+            <div class="preview-content" id="previewContent">
+                <div class="preview-placeholder">
+                    <span>👁️</span>
+                    <p>Click <strong>Preview</strong> to render your note content</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const previewBtn = document.getElementById('previewBtn');
+        const contentField = document.getElementById('content');
+        const previewContent = document.getElementById('previewContent');
+        const previewStatus = document.getElementById('previewStatus');
+
+        previewBtn.addEventListener('click', async function () {
+            const content = contentField.value.trim();
+            if (!content) {
+                previewContent.innerHTML = '<div class="preview-placeholder"><span>⚠️</span><p>Enter some content first</p></div>';
+                return;
+            }
+
+            previewStatus.textContent = 'Rendering...';
+            previewStatus.classList.add('rendering');
+            previewBtn.disabled = true;
+
+            try {
+                const formData = new FormData();
+                formData.append('content', content);
+
+                const response = await fetch('/preview', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    previewContent.innerHTML = data.html;
+                    previewStatus.textContent = 'Rendered';
+                    previewStatus.classList.remove('rendering');
+                    previewStatus.classList.add('success');
+                } else {
+                    previewContent.innerHTML = data.html;
+                    previewStatus.textContent = 'Blocked';
+                    previewStatus.classList.remove('rendering');
+                    previewStatus.classList.add('error');
+                }
+            } catch (err) {
+                previewContent.innerHTML = '<div class="preview-placeholder"><span>❌</span><p>Network error. Please try again.</p></div>';
+                previewStatus.textContent = 'Error';
+                previewStatus.classList.remove('rendering');
+                previewStatus.classList.add('error');
+            } finally {
+                previewBtn.disabled = false;
+                setTimeout(() => {
+                    previewStatus.classList.remove('success', 'error');
+                }, 3000);
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+    <style><%- note.css %></style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <a href="/" class="logo">Chroma<span class="accent">Leak</span></a>
+            <div class="nav-links">
+                <% if (user) { %>
+                    <span class="nav-user"><%= user.username %></span>
+                    <a href="/dashboard">My Notes</a>
+                    <a href="/create">New Note</a>
+                    <a href="/report">Report</a>
+                    <a href="/logout">Logout</a>
+                <% } else { %>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <% if (user) { %>
+        <form id="csrf-protection" aria-hidden="true">
+            <input type="text" name="csrf_token" value="<%= csrfToken %>" readonly tabindex="-1"
+                   style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;border:0;padding:0;">
+        </form>
+        <% } %>
+
+        <article class="note-view">
+            <div class="note-header">
+                <h1 class="note-title"><%= note.title %></h1>
+                <div class="note-meta">
+                    <span>By <strong><%= note.author %></strong></span>
+                    <span>&bull;</span>
+                    <span><%= new Date(note.created_at).toLocaleString() %></span>
+                </div>
+            </div>
+            <div class="note-content">
+                <p><%- note.content.replace(/\n/g, '<br>') %></p>
+            </div>
+            <div class="note-footer">
+                <a href="/" class="btn btn-secondary">&larr; Back</a>
+                <% if (user) { %>
+                    <a href="/report?url=<%= encodeURIComponent('/note/' + note.id) %>" class="btn btn-warning">Report this note</a>
+                <% } %>
+            </div>
+        </article>
+    </main>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<div class="box">
+  <h3>Settings</h3>
+  <table>
+    <tr><th>Key</th><th>Value</th></tr>
+    {% for s in settings %}
+    <tr>
+      <td>{{ s.key }}</td>
+      <td>{% if 'pin' in s.key %}******{% else %}{{ s.val }}{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<div class="box">
+  <h3>Users</h3>
+  <table>
+    <tr><th>ID</th><th>Username</th><th>Role</th></tr>
+    {% for u in users %}
+    <tr><td>{{ u.id }}</td><td>{{ u.username }}</td><td>{{ u.role }}</td></tr>
+    {% endfor %}
+  </table>
+</div>
+<div class="box">
+  <h3>All Uploads</h3>
+  <table>
+    <tr><th>ID</th><th>Owner</th><th>Filename</th><th>Description</th><th>Stored as</th></tr>
+    {% if uploads %}
+      {% for u in uploads %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.username }}</td>
+        <td>{{ u.filename }}</td>
+        <td>{{ u.description }}</td>
+        <td>{{ u.stored_as }}</td>
+      </tr>
+      {% endfor %}
+    {% else %}
+      <tr><td colspan="5">None</td></tr>
+    {% endif %}
+  </table>
+</div>
+<div class="box">
+  <h3>Audit Log (last 30)</h3>
+  <table>
+    <tr><th>Action</th><th>Detail</th><th>Time</th></tr>
+    {% if logs %}
+      {% for l in logs %}
+      <tr>
+        <td>{{ l.action }}</td>
+        <td>{{ l.detail or '' }}</td>
+        <td>{{ l.ts }}</td>
+      </tr>
+      {% endfor %}
+    {% else %}
+      <tr><td colspan="3">Empty</td></tr>
+    {% endif %}
+  </table>
+</div>
+<div class="box">
+  <h3>File-type Scanner</h3>
+  <p>Identify a stored upload via <code>file(1)</code>.</p>
+  <form method="post" action="/admin/scan">
+    <label>Upload ID <input name="upload_id" style="width:120px"></label>
+    &nbsp;<input type="submit" value="Scan">
+  </form>
+</div>
+{% endblock %}

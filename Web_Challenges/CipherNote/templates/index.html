@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}CipherNote — Encrypted Note Sharing{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">🛡️ End-to-End Encrypted</div>
+        <h1 class="hero-title">
+            Your secrets,<br>
+            <span class="gradient-text">secured forever.</span>
+        </h1>
+        <p class="hero-subtitle">
+            CipherNote is a zero-knowledge encrypted note platform. Create, encrypt, and share
+            notes with military-grade security. No one can read your data — not even us.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">
+                <span>Get Started Free</span>
+                <span class="btn-arrow">→</span>
+            </a>
+            <a href="{{ url_for('login') }}" class="btn btn-ghost btn-lg">
+                Sign In
+            </a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-value">12K+</span>
+                <span class="stat-label">Encrypted Notes</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">256-bit</span>
+                <span class="stat-label">AES Encryption</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value">99.9%</span>
+                <span class="stat-label">Uptime</span>
+            </div>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">cipher-engine v2.4</span>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line" data-delay="0">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-cmd typing" data-text="ciphernote encrypt --algo AES-256-GCM">ciphernote
+                        encrypt --algo AES-256-GCM</span>
+                </div>
+                <div class="terminal-line" data-delay="1">
+                    <span class="terminal-output">⣿ Generating encryption key...</span>
+                </div>
+                <div class="terminal-line" data-delay="2">
+                    <span class="terminal-output success">✓ Key generated: 0x7f3a...c9e1</span>
+                </div>
+                <div class="terminal-line" data-delay="3">
+                    <span class="terminal-output">⣿ Encrypting note payload...</span>
+                </div>
+                <div class="terminal-line" data-delay="4">
+                    <span class="terminal-output success">✓ Note encrypted and stored securely</span>
+                </div>
+                <div class="terminal-line" data-delay="5">
+                    <span class="terminal-output dim">Share token: cn_s3cur3_xK9mP2vL...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <h2 class="section-title">Why CipherNote?</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Zero-Knowledge Encryption</h3>
+            <p>Your notes are encrypted client-side. We never see your plaintext data.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔗</div>
+            <h3>Secure Sharing</h3>
+            <p>Share encrypted notes via unique tokens. Revoke access at any time.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Live Preview</h3>
+            <p>Preview your notes with our real-time rendering engine before saving.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🗑️</div>
+            <h3>Auto-Destruct</h3>
+            <p>Set notes to self-destruct after a specified time or number of views.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

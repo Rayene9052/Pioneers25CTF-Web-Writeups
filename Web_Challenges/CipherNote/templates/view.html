@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{{ note['title'] }} — CipherNote{% endblock %}
+
+{% block content %}
+<div class="view-container">
+    <div class="view-header">
+        <div class="view-meta">
+            <a href="{{ url_for('dashboard') }}" class="back-link">← Back to Vault</a>
+            <h1 class="view-title">
+                {% if note['encrypted'] %}
+                <span class="encrypt-badge">🔒</span>
+                {% endif %}
+                {{ note['title'] }}
+            </h1>
+            <div class="view-info">
+                <span class="info-badge">📅 {{ note['created_at'][:16] }}</span>
+                {% if note['encrypted'] %}
+                <span class="info-badge encrypted">🔐 AES-256-GCM</span>
+                {% endif %}
+            </div>
+        </div>
+        {% if not shared %}
+        <div class="view-actions">
+            <button class="btn btn-ghost copy-share-btn"
+                data-share-url="{{ url_for('shared_note', token=note['share_token'], _external=True) }}">
+                🔗 Copy Share Link
+            </button>
+            <form method="POST" action="{{ url_for('delete_note', note_id=note['id']) }}"
+                onsubmit="return confirm('Delete this note permanently?')">
+                <button type="submit" class="btn btn-danger-ghost">🗑️ Delete</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="view-card">
+        <div class="view-content">
+            {{ note['content'] }}
+        </div>
+    </div>
+
+    {% if shared %}
+    <div class="shared-banner">
+        <span>🔗</span>
+        <p>This note was shared via a secure link.
+            <a href="{{ url_for('register') }}">Create your own vault</a> to store encrypted notes.
+        </p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

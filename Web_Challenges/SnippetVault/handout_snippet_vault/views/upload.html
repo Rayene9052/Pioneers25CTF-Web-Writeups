@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Upload Attachment</h2>
+<div class="box">
+  <form method="post" enctype="multipart/form-data">
+    <label>File <input type="file" name="file" style="width:auto"></label><br><br>
+    <label>Description<br>
+      <input name="desc" maxlength="256"
+             placeholder="Brief note about this file"></label><br><br>
+    <label>Category<br>
+      <select name="category">
+        <option value="misc">Misc</option>
+        <option value="source">Source Code</option>
+        <option value="config">Configuration</option>
+        <option value="docs">Documentation</option>
+        <option value="binary">Binary / Executable</option>
+      </select>
+    </label><br><br>
+    <input type="submit" value="Upload">
+  </form>
+  {% if uploaded_name %}
+    <p class="ok">Uploaded &ndash; stored as <code>{{ uploaded_name }}</code></p>
+  {% elif msg %}
+    <p class="{{ cls }}">{{ msg }}</p>
+  {% endif %}
+</div>
+<div class="box">
+  <h3>My Uploads</h3>
+  <table>
+    <tr><th>ID</th><th>Filename</th><th>Description</th><th>Stored as</th></tr>
+    {% if uploads %}
+      {% for r in uploads %}
+      <tr>
+        <td>{{ r.id }}</td>
+        <td>{{ r.filename }}</td>
+        <td>{{ r.description }}</td>
+        <td>{{ r.stored_as }}</td>
+      </tr>
+      {% endfor %}
+    {% else %}
+      <tr><td colspan="4">None</td></tr>
+    {% endif %}
+  </table>
+</div>
+{% endblock %}

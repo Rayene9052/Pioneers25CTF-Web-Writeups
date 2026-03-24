@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017
+      - DB_NAME=ctf
+      - SESSION_SECRET=change_me_super_secret
+      # Updated values:
+      - ADMIN_PASSWORD=Y0U_H4v3_n0_3n3m1es_br0th3r!
+      - FLAG=Pioneers25{F4r_t0_th3_w3st_Acr0ss_th3_s3a_th3r3_1s_4_laNd_c4ll3d_Vinland}
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:7
+    environment:
+      - MONGO_INITDB_DATABASE=ctf
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro

@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Internal Report Search</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Internal Report Search</h1>
+          <div class="sub">Search archived operational reports</div>
+        </div>
+      </div>
+      <a class="pill" href="/admin/dashboard">← Back</a>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Search Reports</h2>
+        <div class="small">Search by title and optional content filter.</div>
+
+        <form method="GET" action="/admin/search">
+          <label>Title</label>
+          <input name="title" value="Internal Flag Report" />
+
+          <label>Content (optional)</label>
+          <input name="content" placeholder="Optional filter" />
+
+          <div class="row">
+            <button class="btn" type="submit">Run Search</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>System Notice</h2>
+        <div class="kv">
+          The search system is optimized for internal automation and
+          returns simplified status responses.
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+</head>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <a href="/" class="logo">Chroma<span class="accent">Leak</span></a>
+            <div class="nav-links">
+                <% if (user) { %>
+                    <span class="nav-user"><%- user.username %></span>
+                    <a href="/dashboard">My Notes</a>
+                    <a href="/create">New Note</a>
+                    <a href="/report">Report</a>
+                    <a href="/logout">Logout</a>
+                <% } else { %>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="hero">
+            <h1>Welcome to Chroma<span class="accent">Leak</span></h1>
+            <p class="subtitle">Share beautifully styled notes with custom CSS themes.</p>
+            <p class="description">
+                Create notes, customize them with your own CSS, and share them with the world.
+                Our advanced CSS sanitizer ensures your styles are safe and secure.
+            </p>
+            <div class="hero-actions">
+                <% if (user) { %>
+                    <a href="/create" class="btn btn-primary">Create Note</a>
+                    <a href="/dashboard" class="btn btn-secondary">My Notes</a>
+                <% } else { %>
+                    <a href="/register" class="btn btn-primary">Get Started</a>
+                    <a href="/login" class="btn btn-secondary">Login</a>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">&#9998;</div>
+                <h3>Create Notes</h3>
+                <p>Write and share notes with a clean, simple interface.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#127912;</div>
+                <h3>Custom Themes</h3>
+                <p>Style your notes with custom CSS for a unique look.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128274;</div>
+                <h3>Secure </h3>
+                <p>Multi-pass sanitizer with defense-in-depth protection.</p>
+            </div>
+        </div>
+    </main>
+
+<%- include('partials/footer') %>

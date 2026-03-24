@@ -1,0 +1,94 @@
+<%- include('partials/header') %>
+</head>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <a href="/" class="logo">Chroma<span class="accent">Leak</span></a>
+            <div class="nav-links">
+                <span class="nav-user"><%= user.username %></span>
+                <a href="/dashboard">My Notes</a>
+                <a href="/create">New Note</a>
+                <a href="/report">Report</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- CSRF Protection Token -->
+        <form id="csrf-protection" aria-hidden="true">
+            <input type="text" name="csrf_token" value="<%= csrfToken %>" readonly tabindex="-1"
+                   style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;border:0;padding:0;">
+        </form>
+
+        <div class="form-container">
+            <h2>Report a Page</h2>
+            <p class="report-info">
+                Found something suspicious? Report a page URL and our admin will review it.
+                The admin will visit the page while logged in to investigate.
+            </p>
+
+            <% if (error) { %>
+                <div class="alert alert-error"><%= error %></div>
+            <% } %>
+            <% if (success) { %>
+                <div class="alert alert-success"><%= success %></div>
+            <% } %>
+
+            <div class="form-group">
+                <label for="report-url">Page URL</label>
+                <input type="url" id="report-url" placeholder="http://localhost:3000/note/..."
+                       value="">
+                <small>Must be a URL on this application.</small>
+            </div>
+            <button id="report-btn" class="btn btn-primary btn-full">Submit Report</button>
+            <div id="report-result" class="report-result"></div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('report-btn').addEventListener('click', async () => {
+            const url = document.getElementById('report-url').value;
+            const resultDiv = document.getElementById('report-result');
+            const btn = document.getElementById('report-btn');
+
+            if (!url) {
+                resultDiv.innerHTML = '<div class="alert alert-error">Please enter a URL.</div>';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+            resultDiv.innerHTML = '';
+
+            try {
+                const res = await fetch('/api/report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url }),
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    resultDiv.innerHTML = '<div class="alert alert-success">Report submitted! An admin will review this page shortly.</div>';
+                } else {
+                    resultDiv.innerHTML = `<div class="alert alert-error">${data.error || 'Failed to submit report.'}</div>`;
+                }
+            } catch (err) {
+                resultDiv.innerHTML = '<div class="alert alert-error">Network error. Please try again.</div>';
+            }
+
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.textContent = 'Submit Report';
+            }, 30000);
+        });
+
+        // Pre-fill URL from query string
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('url')) {
+            document.getElementById('report-url').value = window.location.origin + params.get('url');
+        }
+    </script>
+
+<%- include('partials/footer') %>

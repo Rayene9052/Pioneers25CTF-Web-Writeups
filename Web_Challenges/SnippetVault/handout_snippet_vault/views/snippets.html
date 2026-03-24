@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>My Snippets</h2>
+<div class="box">
+  <h3>New Snippet</h3>
+  <form method="post">
+    <label>Title<br><input name="title"></label><br><br>
+    <label>Language<br>
+      <select name="lang">
+        {% for l in langs %}<option value="{{ l }}">{{ l }}</option>{% endfor %}
+      </select>
+    </label><br><br>
+    <label>Content<br><textarea name="content" rows="10"></textarea></label><br><br>
+    <label><input type="checkbox" name="private" checked> Private</label><br><br>
+    <input type="submit" value="Save">
+  </form>
+</div>
+{% if rows %}
+  {% for r in rows %}
+  <div class="box">
+    <b>#{{ r.id }} &ndash; {{ r.title }}</b>
+    <span class="muted">[{{ r.lang }}] {{ r.created_at }}</span>
+    <pre>{{ r.content }}</pre>
+  </div>
+  {% endfor %}
+{% else %}
+  <p>No snippets yet.</p>
+{% endif %}
+{% endblock %}

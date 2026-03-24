@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexaCorp — Employee Portal</title>
+  <!-- TODO @devops: remove X-Dev-Mode bypass before final production deployment -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --accent: #4f8ef7;
+      --accent-dim: #2d5ab0;
+      --text: #e2e8f0;
+      --text-dim: #8892a4;
+      --danger: #f56565;
+      --success: #48bb78;
+      --border: #2e3348;
+      --radius: 10px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--accent);
+    }
+    .logo span { color: var(--text); }
+    #nav-user { font-size: 0.85rem; color: var(--text-dim); }
+    #nav-logout {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 5px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      margin-left: 12px;
+      display: none;
+    }
+    #nav-logout:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Main ── */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* ── Auth Card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      width: 100%;
+      max-width: 420px;
+    }
+    .card h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 1.5rem;
+      background: var(--surface2);
+      padding: 4px;
+      border-radius: 8px;
+    }
+    .tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      padding: 7px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      transition: all 0.15s;
+    }
+    .tab-btn.active {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    .form-group { margin-bottom: 1rem; }
+    label { display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 5px; }
+    input[type="text"], input[type="password"], input[type="email"] {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 9px 12px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border 0.15s;
+    }
+    input:focus { border-color: var(--accent); }
+
+    .btn {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.15s;
+    }
+    .btn:hover { background: var(--accent-dim); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .msg {
+      font-size: 0.82rem;
+      margin-top: 0.8rem;
+      padding: 8px 10px;
+      border-radius: 6px;
+      display: none;
+    }
+    .msg.error { background: rgba(245,101,101,0.1); color: var(--danger); border: 1px solid rgba(245,101,101,0.3); }
+    .msg.success { background: rgba(72,187,120,0.1); color: var(--success); border: 1px solid rgba(72,187,120,0.3); }
+
+    /* ── Dashboard ── */
+    #dashboard { display: none; width: 100%; max-width: 900px; }
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    .dash-header h2 { font-size: 1.25rem; }
+    .badge {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge.admin { background: rgba(79,142,247,0.15); border-color: var(--accent-dim); color: var(--accent); }
+
+    .search-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1.2rem;
+    }
+    .search-bar input {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 8px 12px;
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .search-bar input:focus { border-color: var(--accent); }
+    .search-bar button {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 7px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .search-bar button:hover { border-color: var(--accent); color: var(--accent); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      background: var(--surface2);
+      color: var(--text-dim);
+      font-weight: 500;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      border-bottom: 1px solid var(--border);
+    }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .empty { text-align: center; padding: 2rem; color: var(--text-dim); }
+    .section { margin-top: 1.2rem; }
+    .section-title {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Nexa<span>Corp</span></div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span id="nav-user"></span>
+    <button id="nav-logout" onclick="logout()">Sign out</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ── Auth Panel ── -->
+  <div class="card" id="auth-panel">
+    <h2>Employee Portal</h2>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('login')">Sign in</button>
+      <button class="tab-btn" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <!-- Login -->
+    <div id="tab-login">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="login-user" placeholder="username" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+      <button class="btn" onclick="doLogin()">Sign in</button>
+      <div class="msg" id="login-msg"></div>
+    </div>
+
+    <!-- Register -->
+    <div id="tab-register" style="display:none;">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="reg-user" placeholder="username" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="reg-pass" placeholder="Min. 6 characters" autocomplete="new-password" />
+      </div>
+      <div class="form-group">
+        <label>Email <span style="color:var(--text-dim)">(optional)</span></label>
+        <input type="email" id="reg-email" placeholder="you@nexacorp.io" />
+      </div>
+      <button class="btn" onclick="doRegister()">Create account</button>
+      <div class="msg" id="reg-msg"></div>
+    </div>
+  </div>
+
+  <!-- ── Dashboard ── -->
+  <div id="dashboard">
+    <div class="dash-header">
+      <h2>Employee Directory</h2>
+      <span class="badge" id="role-badge">employee</span>
+    </div>
+
+    <div class="search-bar" id="search-bar" style="display:none;">
+      <input type="text" id="search-input" placeholder="Search employees by name..." />
+      <button onclick="doSearch()">Search</button>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Directory</div>
+      <table id="emp-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Salary</th>
+          </tr>
+        </thead>
+        <tbody id="emp-body">
+          <tr><td colspan="4" class="empty">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<script>!function(){var E=atob("L2dyYXBocWw="),S=localStorage,K="_nc";function gt(){return S.getItem(K)}function st(t){S.setItem(K,t)}function ct(){S.removeItem(K)}async function q(a,v){var h={"Content-Type":"application/json"},t=gt();if(t)h["Authorization"]="Bearer "+t;var r=await fetch(E,{method:"POST",headers:h,body:JSON.stringify({query:a,variables:v||{}})});var d=await r.json();if(d.errors)throw new Error(d.errors[0].message);return d.data}window.doLogin=async function(){var u=document.getElementById("login-user").value.trim(),p=document.getElementById("login-pass").value,m=document.getElementById("login-msg");try{var d=await q("mutation L($u:String!,$p:String!){login(username:$u,password:$p){token user{id username role}}}",{u:u,p:p});st(d.login.token);sd(d.login.user)}catch(e){sm(m,e.message,"error")}};window.doRegister=async function(){var u=document.getElementById("reg-user").value.trim(),p=document.getElementById("reg-pass").value,e=document.getElementById("reg-email").value.trim()||null,m=document.getElementById("reg-msg");try{var d=await q("mutation R($u:String!,$p:String!,$e:String){register(username:$u,password:$p,email:$e){token user{id username role}}}",{u:u,p:p,e:e});st(d.register.token);sd(d.register.user)}catch(x){sm(m,x.message,"error")}};window.logout=function(){ct();document.getElementById("dashboard").style.display="none";document.getElementById("auth-panel").style.display="block";document.getElementById("nav-logout").style.display="none";document.getElementById("nav-user").textContent=""};function sd(u){document.getElementById("auth-panel").style.display="none";var d=document.getElementById("dashboard");d.style.display="block";var b=document.getElementById("role-badge");b.textContent=u.role;if(u.role==="admin")b.classList.add("admin");document.getElementById("nav-user").textContent=u.username;document.getElementById("nav-logout").style.display="inline-block";if(u.role==="admin")document.getElementById("search-bar").style.display="flex";le()}async function le(){try{var d=await q("query{getEmployees{id name department salary}}");re(d.getEmployees)}catch(e){document.getElementById("emp-body").innerHTML='<tr><td colspan="4" class="empty" style="color:var(--danger)">'+e.message+"</td></tr>"}}window.doSearch=async function(){var v=document.getElementById("search-input").value;try{var d=await q("query S($q:String!){searchEmployees(query:$q){id name department salary}}",{q:v});re(d.searchEmployees)}catch(e){document.getElementById("emp-body").innerHTML='<tr><td colspan="4" class="empty" style="color:var(--danger)">'+e.message+"</td></tr>"}};function re(a){var t=document.getElementById("emp-body");if(!a||!a.length){t.innerHTML='<tr><td colspan="4" class="empty">No employees found.</td></tr>';return}t.innerHTML=a.map(function(e){return'<tr><td style="color:var(--text-dim)">'+e.id+"</td><td>"+e.name+"</td><td>"+e.department+"</td><td>"+(e.salary!=null?"$"+e.salary.toLocaleString():"\u2014")+"</td></tr>"}).join("")}window.switchTab=function(t){document.getElementById("tab-login").style.display=t==="login"?"block":"none";document.getElementById("tab-register").style.display=t==="register"?"block":"none";document.querySelectorAll(".tab-btn").forEach(function(b,i){b.classList.toggle("active",(i===0)===(t==="login"))})};function sm(el,t,c){el.textContent=t;el.className="msg "+c;el.style.display="block";setTimeout(function(){el.style.display="none"},5e3)}var tk=gt();if(tk){q("query{me{id username role}}").then(function(d){if(d.me)sd(d.me)}).catch(function(){ct()})}}()</script>
+</body>
+</html>

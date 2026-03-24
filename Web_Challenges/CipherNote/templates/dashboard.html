@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard — CipherNote{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <div>
+            <h1 class="page-title">Your Vault</h1>
+            <p class="page-subtitle">{{ notes|length }} encrypted note{{ 's' if notes|length != 1 else '' }} stored</p>
+        </div>
+        <a href="{{ url_for('create') }}" class="btn btn-primary">
+            <span>+ New Note</span>
+        </a>
+    </div>
+
+    {% if notes %}
+    <div class="notes-grid">
+        {% for note in notes %}
+        <div class="note-card" data-note-id="{{ note['id'] }}">
+            <div class="note-card-header">
+                <h3 class="note-title">
+                    {% if note['encrypted'] %}
+                    <span class="encrypt-badge" title="Encrypted">🔒</span>
+                    {% else %}
+                    <span class="encrypt-badge" title="Plaintext">📄</span>
+                    {% endif %}
+                    {{ note['title'] }}
+                </h3>
+                <span class="note-date">{{ note['created_at'][:16] }}</span>
+            </div>
+            <div class="note-card-body">
+                <p class="note-preview">{{ note['content'][:120] }}{% if note['content']|length > 120 %}...{% endif %}
+                </p>
+            </div>
+            <div class="note-card-footer">
+                <a href="{{ url_for('view_note', note_id=note['id']) }}" class="btn btn-sm btn-ghost">
+                    View
+                </a>
+                <button class="btn btn-sm btn-ghost copy-share-btn"
+                    data-share-url="{{ url_for('shared_note', token=note['share_token'], _external=True) }}"
+                    title="Copy share link">
+                    🔗 Share
+                </button>
+                <form method="POST" action="{{ url_for('delete_note', note_id=note['id']) }}" class="inline-form"
+                    onsubmit="return confirm('Permanently delete this note?')">
+                    <button type="submit" class="btn btn-sm btn-danger-ghost">🗑️</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-icon">📝</div>
+        <h2>Your vault is empty</h2>
+        <p>Create your first encrypted note to get started.</p>
+        <a href="{{ url_for('create') }}" class="btn btn-primary">
+            <span>Create First Note</span>
+            <span class="btn-arrow">→</span>
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+services:
+  chromaleak:
+    build: .
+    ports:
+      - "4002:3000"
+    environment:
+      - PORT=3000
+      - FLAG=REDACTED
+      - ADMIN_PASSWORD=REDACTED
+      - APP_URL=http://localhost:4002
+      - BOT_INTERNAL_URL=http://localhost:3000
+      - BOT_TIMEOUT=8000
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '1.0'
+    tmpfs:
+      - /tmp

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Register — CipherNote{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <span class="auth-icon">🛡️</span>
+            <h1>Create Your Vault</h1>
+            <p>Set up your encrypted workspace in seconds</p>
+        </div>
+        <form method="POST" action="{{ url_for('register') }}" class="auth-form" id="registerForm">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="username" name="username" class="form-input" placeholder="Choose a username"
+                        required minlength="3" autocomplete="username">
+                </div>
+                <span class="form-hint">Minimum 3 characters</span>
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Master Password</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔑</span>
+                    <input type="password" id="password" name="password" class="form-input"
+                        placeholder="Create a strong password" required minlength="4" autocomplete="new-password">
+                </div>
+                <span class="form-hint">Minimum 4 characters — this encrypts your vault</span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="registerBtn">
+                <span>Initialize Vault</span>
+                <span class="btn-arrow">→</span>
+            </button>
+        </form>
+        <div class="auth-footer">
+            <p>Already have a vault? <a href="{{ url_for('login') }}">Decrypt & Login</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

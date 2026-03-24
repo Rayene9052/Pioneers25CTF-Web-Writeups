@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+</head>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <a href="/" class="logo">Chroma<span class="accent">Leak</span></a>
+            <div class="nav-links">
+                <% if (user) { %>
+                    <span class="nav-user"><%= user.username %></span>
+                    <a href="/dashboard">My Notes</a>
+                    <a href="/create">New Note</a>
+                    <a href="/report">Report</a>
+                    <a href="/logout">Logout</a>
+                <% } else { %>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="error-page">
+            <h1>Oops!</h1>
+            <p><%= message %></p>
+            <a href="/" class="btn btn-primary">Go Home</a>
+        </div>
+    </main>
+
+<%- include('partials/footer') %>
