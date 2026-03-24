@@ -33,11 +33,11 @@ Each challenge directory contains:
 
 ```
 Challenge_Name/
-├── README.md          # Complete writeup with blackbox analysis and source code examination
-├── Dockerfile         # Container configuration
-├── docker-compose.yml # Multi-container setup (if applicable)
-├── solver/            # Automated exploitation scripts (for blackbox challenges)
-└── src/               # Application source code
+├── README.md          
+├── Dockerfile         
+├── docker-compose.yml 
+├── solver/            
+└── src/               
 ```
 
 ### Writeup Structure
