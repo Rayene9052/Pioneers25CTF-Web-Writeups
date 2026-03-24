@@ -1,4 +1,4 @@
-# NoSQL True Warrior — Writeup
+# True Warrior — Writeup
 
 **Category:** Web
 **Flag:** `Pioneers25{F4r_t0_th3_w3st_Acr0ss_th3_s3a_th3r3_1s_4_laNd_c4ll3d_Vinland}`
