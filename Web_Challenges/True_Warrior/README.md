@@ -467,4 +467,4 @@ The application requires `^` at the start of regex patterns, forcing prefix matc
 
 ## Fun Fact
 
-The challenge title "NoSQL True Warrior" is a play on the phrase "No true Scotsman" — a logical fallacy. Here, there's "no true warrior" who can defend against NoSQL injection without proper input validation! ⚔️
+I thought this will be the challenge with most solves turned out to be the least xD
