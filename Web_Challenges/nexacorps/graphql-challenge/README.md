@@ -14,6 +14,8 @@
 3. **Mass Assignment Vulnerability** → Privilege Escalation
 4. **SQL Injection with WAF Bypass** → Flag Extraction
 
+![Challenge Description](challenge_description.png)
+
 ---
 
 ## Deployment
@@ -33,6 +35,8 @@ The challenge will be available at `http://localhost:3000`.
 ### Initial Reconnaissance
 
 Visiting `http://localhost:3000/` shows a corporate login page with minimal functionality. View the page source:
+
+![Challenge UI](challenge_ui.png)
 
 ```html
 <!-- TODO @devops: remove X-Dev-Mode bypass before final production deployment -->

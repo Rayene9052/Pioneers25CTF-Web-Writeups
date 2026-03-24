@@ -15,6 +15,8 @@
 
 **Objective:** Bypass the authorization middleware to access the forbidden flower and retrieve the flag.
 
+![Challenge Description](challenge_description.png)
+
 ---
 
 ## Deployment
@@ -41,6 +43,8 @@ node server.js
 ### 1. Initial Exploration
 
 Visiting the homepage shows a list of available flowers:
+
+![Challenge UI](challenge_ui.png)
 
 ```
 🌸 Available Flowers:

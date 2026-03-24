@@ -16,6 +16,8 @@
 4. **Stored Payload Upload** → Bypass sanitizer
 5. **Command Injection** → Read flag
 
+![Challenge Description](challenge_description.png)
+
 ---
 
 ## Deployment
@@ -45,6 +47,8 @@ python app.py
 #### Vulnerability Location
 
 The `/explore` route's search functionality:
+
+![Challenge UI](challenge_ui.png)
 
 ```python
 clean = waf_check(search)

@@ -15,6 +15,8 @@
 
 **Objective:** Steal the admin's CSRF token using CSS injection.
 
+![Challenge Description](challenge_description.png)
+
 ---
 
 ## Deployment
@@ -47,6 +49,8 @@ The application offers the following features:
 - **Create notes** with optional custom CSS themes
 - **Report notes** to the admin for review
 - View CSS sanitizer source code at `/source`
+
+![Challenge UI](challenge_ui.png)
 
 ### 2. Understanding the Admin Bot
 

@@ -9,6 +9,8 @@
 
 SecureMessenger is an ASP.NET Core web application that provides a template preview feature using the RazorLight templating engine. Users can submit custom templates that get rendered server-side. While the application implements security filters to block dangerous keywords, these filters can be bypassed using .NET reflection techniques.
 
+![Challenge Description](challenge_description.png)
+
 ---
 
 ## Deployment
@@ -36,6 +38,8 @@ dotnet run
 ### 1. Exploring the Application
 
 Upon visiting the application, we're presented with a template editor where we can submit custom Razor templates for preview. The application renders our input server-side and displays the result.
+
+![Challenge UI](challenge_ui.png)
 
 ### 2. Testing for Template Injection
 

@@ -15,6 +15,8 @@
 1. Bypass authentication to login as admin using blind NoSQL injection
 2. Extract the flag from the internal reports using authenticated blind regex search
 
+![Challenge Description](challenge_description.png)
+
 ---
 
 ## Deployment
@@ -43,6 +45,8 @@ node server.js
 ### 1. Initial Exploration
 
 Visiting the application presents a simple login page:
+
+![Challenge UI](challenge_ui.png)
 
 ```
 ╔══════════════════════════════╗

@@ -15,6 +15,8 @@ CipherNote is a "secure" encrypted note-sharing platform built with Flask. Users
 >
 > Can you prove them wrong?
 
+![Challenge Description](challenge_description.png)
+
 ---
 
 ## Deployment
@@ -41,6 +43,8 @@ python app.py
 ### 1. Exploring the Application
 
 After registering and logging in, the **Create Note** page reveals a **"Preview"** button. Clicking it sends the note content to `/preview` via AJAX and renders the result server-side.
+
+![Challenge UI](challenge_ui.png)
 
 ### 2. Testing for Template Injection
 
